@@ -1,0 +1,6 @@
+<!--component/deviceItem.wxml-->
+<view class="item">
+    <text class="text_name">{{itemName}}</text>
+    <button class="btn_conn" data-id="{{deviceId}}" bindtap="{{connected?'closeConn':'createConn'}}">{{connected?"断开连接":"连接"}}<image wx:if="{{connecting}}" class="connecting" src="/img/35.gif"></image></button>
+</view>
+ 

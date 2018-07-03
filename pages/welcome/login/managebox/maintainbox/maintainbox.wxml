@@ -1,0 +1,33 @@
+<view class="table">
+  <view class="tr bg-w">
+    <view class="th">货柜Id</view>
+    <view class="th">货柜名字</view>
+  </view>
+    <block wx:for="{{listData}}" wx:key="{{code}}">
+      <view bindtap='lookdetails'  data-status="{{item.containnerstatus}}" data-id="{{item.containerid }}" data-contypeid="{{item.contypeid}}" data-mac="{{item.containemac}}" data-containernum="{{item.containernum}}" class="tr bg-g" wx:if="{{index % 2 == 0}}">
+        <view class="td">{{item.containernum}}</view>
+        <!-- 未初始化 -->
+        <block wx:if="{{item.containnerstatus==0}}">
+          <view class="td">未初始化</view>
+        </block>
+        <block wx:if="{{item.containnerstatus==1}}">
+          <view class="td">{{item.containername}}</view>
+        </block>
+      </view>
+
+
+
+      <view bindtap='lookdetails' data-status="{{item.containnerstatus}}" data-id="{{item.containerid}}" data-mac="{{item.containemac}}" data-btype="{{item.containernum}}" data-containernum="{{item.containernum}}" class="tr" wx:else>
+        <view class="td">{{item.containernum}}</view>
+        <!-- 未初始化，点击初始化 -->
+        <block wx:if="{{item.containnerstatus==0}}">
+          <view class="td">未初始化</view>
+        </block>
+        <block wx:if="{{item.containnerstatus==1}}">
+          <view class="td">{{item.containername}}</view>
+        </block>
+      </view>
+    </block>
+
+    <block wx:if="{{listData.length==0}}" ><view style="font-weight:bold;color:#999;margin-top:20%">你还没有申请过柜子</view></block> 
+</view>

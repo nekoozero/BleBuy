@@ -1,0 +1,37 @@
+
+<view class="whole">
+    <view class="header">
+        <text >欢迎来到蓝牙购物</text>
+        <image class="header_img" src="/img/ble.png"></image>
+    </view>
+    <view class="message">
+        <text catchtap="moretips" class='message_text'>温馨提示：<text>{{msg?msg:"使用前请记得打开蓝牙和定位服务！"}}</text><text  class="moretips">更多……</text></text>
+    </view>
+
+    <view class="act">
+         <button  hidden='{{initialized}}' class="btn_init" bindtap='initBle'><text>初始化蓝牙 </text><image class="act_img"  src="/img/Ible.png" ></image></button> 
+         <button wx:if="{{initialized==true}}" class="btn_init" bindtap='{{discoverying?"stopScan":"startScan"}}'>{{discoverying?'停止搜索':'开始搜索'}} <image wx:if="{{discoverying}}" class="act_img"  src="/img/5.gif"></image></button>
+         <!-- <button bindtap='a'>d</button> -->
+    </view>
+
+
+
+    <scroll-view class="deviceList">
+        <block wx:if="{{data.length!=0}}" wx:for="{{data}}" wx:key="unique">
+            <item itemName="{{item.name}}" itemDeviceId="{{item.deviceId}}" deviceId="{{item.deviceId}}">
+            </item> 
+        </block>
+    </scroll-view>
+
+    <view >
+       <image src="/img/other.png" class="other" bindtap='other'></image>
+    </view>
+
+    <action-sheet hidden="{{showOthers}}" >
+      <action-sheet-item data-role="0" bindtap="changeRole">补货员</action-sheet-item>
+      <action-sheet-item data-role="1" bindtap="changeRole">管理员</action-sheet-item>
+      <action-sheet-cancel bindtap="other">取消</action-sheet-cancel>
+    </action-sheet>
+</view>
+
+

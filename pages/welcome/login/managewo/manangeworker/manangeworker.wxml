@@ -1,0 +1,18 @@
+<view class="table">
+  <view class="tr bg-w">
+    <view class="th">工号</view>
+    <view class="th">姓名</view>
+  </view>
+    <block wx:for="{{listData}}" wx:key="{{code}}">
+      <view bindtap='lookworker' data-id="{{item.id}}" data-btype="{{item.type}}" class="tr bg-g {{item.used==1}}" wx:if="{{index % 2 == 0}}">
+        <view class="td" >{{item.workId}}</view>
+        <view class="td">{{item.name}}</view>
+        
+      </view>
+      <view bindtap='lookworker' data-id="{{item.id}}" data-btype="{{item.type}}" class="tr {{item.used==1}}"  wx:else>
+        <view class="td">{{item.workId}}</view>
+        <view class="td">{{item.name}}</view>
+        
+      </view>
+    </block>
+</view>

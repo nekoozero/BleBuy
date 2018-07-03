@@ -1,0 +1,16 @@
+/* pages/welcome/login/managebox/maintainbox/initial/initial.wxss */
+.container{
+  height: 80vh;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.header{
+  border-bottom:3px #999 solid;
+  font-size:50rpx;
+  font-weight:bold;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-bottom: 12rpx;
+}

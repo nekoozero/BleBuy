@@ -1,0 +1,25 @@
+{
+  "tabBar": {
+    "selectedColor": "#1296db",
+    "list": [
+      {
+        "pagePath": "pages/welcome/login/managebox/managebox",
+        "text": "货柜管理",
+        "iconPath": "img/off.png",
+        "selectedIconPath": "img/on.png"
+      }, 
+      {
+        "pagePath": "pages/welcome/login/managewo/managewo",
+        "text": "配货员管理",
+        "iconPath": "img/onstaff.png",
+        "selectedIconPath": "img/offstaff.png"
+      },
+      {
+        "pagePath": "pages/welcome/login/manageme/manageme",
+        "text": "个人中心",
+        "iconPath": "img/aboutf.png",
+        "selectedIconPath": "img/aboutt.png"
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+<view class="table">
+  <view class="tr bg-w">
+    <view class="th">地点</view>
+    <view class="th">货柜id</view>
+    <view class="th ">操作</view>
+  </view>
+  <block wx:for="{{listData}}" wx:key="{{code}}">
+    <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+      <view class="td">{{item.containnerstoreadd}}</view>
+      <view class="td">{{item.containernum}}</view>
+      <view class="td"><button class="btn-look" bindtap='details' data-id="{{item.containerid}}" data-num="{{item.containernum}}" data-distributor-id="{{item.conbydisid}}" data-device-id="{{item.containemac}}">查看</button></view>
+    </view>
+    <view class="tr" wx:else>
+      <view class="td">{{item.containnerstoreadd}}</view>
+      <view class="td">{{item.containernum}}</view>
+      <view class="td"><button class="btn-look" bindtap='details' data-id="{{item.containerid}}" data-num="{{item.containernum}}" data-distributor-id="{{item.conbydisid}}" data-device-id="{{item.containemac}}">查看</button></view>
+    </view>
+  </block>
+</view>

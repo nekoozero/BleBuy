@@ -1,0 +1,7 @@
+<import src="/template/template.wxml"/>
+<view class="container " >
+    <button class='btn-request' bindtap='requirebox'>货柜申请</button>
+    <button class='btn-request' bindtap='maintainbox'>货柜维护</button>
+    <!-- <button class='btn-request' bindtap='querybox'>货柜查询</button> -->
+</view>
+<template is="tabBar" data="{{tabBar:bindData.tabBar}}"/>

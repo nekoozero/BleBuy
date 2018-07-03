@@ -1,0 +1,30 @@
+<view>
+    <view class="container">
+      <form bindsubmit='submitpass'>
+        <view class="pass">
+            <label for="oldpass"> 
+              <text>原密码：</text>
+              <input  name='oldpass' class="input" id="oldpass" type="password"></input>
+            </label>
+        </view>
+        <view class="pass">
+            <label for="newpass">
+              <text>新密码：</text>
+              <input name='newpass' class="input" id="newpass" type="password"></input>
+            </label>
+        </view>
+        <view class="pass">
+            <label for="conpass">
+              <text>确认密码：</text>
+              <input name='conpass' class="input" id="conpass" type="password"></input>
+            </label>
+        </view>
+        <view class="btn">
+            <button class="btn"  form-type='submit'>确认修改</button>
+        </view>
+        <view class="mess">
+            <text>{{msg}}</text>
+        </view>
+      </form>
+    </view>
+</view>

@@ -1,0 +1,25 @@
+<view>
+    <view>
+       <view class='item'>
+        <text>员工工号：</text><text  class="message">{{worker.supplierloginid}}</text>
+      </view>
+      <view class='item'>
+        <text>员工姓名：</text><text  class="message">{{worker.suppliername}}</text>
+      </view>
+      <view class='item'>
+       <text>员工微信号：</text><text class="message">{{worker.supplierwechat}}</text>
+      </view>
+      <view class='item'>
+       <text>员工手机号：</text><text class="message">{{worker.suppliertelphone}}</text>
+      </view>
+    </view>
+    <view>
+       <block wx:if="{{worker.supplierdeltag==0}}">
+         <button class="weui-btn" type="warn" bindtap='turnon' >禁止中，点击启用……</button>
+       </block> 
+       <block wx:if="{{worker.supplierdeltag==1}}">
+         <button class="weui-btn" type="primary" bindtap='turnoff'>启用中，点击禁用……</button>
+       </block>
+       <button class="weui-btn" type="primary" bindtap='updateworker' data-workid="{{worker.id}}">点击修改</button>
+    </view>
+</view>

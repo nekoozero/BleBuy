@@ -1,0 +1,38 @@
+<view>
+   <view class="header">
+      <text>分销商注册</text>
+   </view>
+   <form bindsubmit='register'>
+      <view class="body">
+          <view>
+              <text>用户名：</text>
+              <input name='loginid' type="text" class="input-item"></input>
+          </view>
+          <view>
+              <text>密码：</text>
+              <input name='password' type="password" class="input-item"></input>
+          </view>
+          <view>
+              <text>确认密码：</text>
+              <input name='repassword' type="password" class="input-item"></input>
+          </view>
+          <view>
+              <text>手机号：</text>
+              <input bindblur="getphone" name='telphone' class="input-item"></input>
+          </view>
+
+          <view>
+              <text>验证码：</text>
+              <input name='verifycode' class="input-item"></input>
+              <button size='mini' type='primary' bindtap='sendMsg'  >{{btnval}}</button>
+          </view>
+      </view>
+      <view class="footer">
+          <button form-type='submit' class="weui-btn" type="primary">注册</button>
+      </view>
+   </form>
+   <view class="error">
+       <text>{{msg}}</text>
+   </view>
+
+</view>

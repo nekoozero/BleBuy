@@ -1,0 +1,15 @@
+.input{
+  float:right;
+  border-bottom: 1px
+ 
+}
+.pass,.btn,.mess{
+  margin-top: 50rpx;
+}
+.btn{
+  width:400rpx;
+}
+.mess{
+  color:red;
+  font-size: 28rpx
+}

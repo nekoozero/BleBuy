@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "选择购买的商品",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "littleBox": "/component/littleBox/littleBox"
+  }
+}

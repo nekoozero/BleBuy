@@ -1,0 +1,7 @@
+<import src="/template/template.wxml"/>
+
+<template is="tabBar" data="{{tabBar:bindData.tabBar}}"/>
+<view class="body" >
+    <button bindtap='updatepass'>修改密码</button>
+     <button bindtap='gotobuy'>我要购物</button>
+</view>

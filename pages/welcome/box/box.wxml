@@ -1,0 +1,35 @@
+  <view>
+    <view class="viewClass">
+      <view class="wholeBox">
+          <block  wx:for="{{grids}}" wx:key="unique">
+          <block wx:if="{{item.congridtopbot==1}}" >
+              <littleBox data-open="{{item.congridstatus}}" data-index="{{index}}"  open="{{item.congridstatus}}" num="{{item.congridstandbytwo}}"  index="{{index}}" style="float:left;clear:left;" bindtap="add"></littleBox>
+          </block>
+          <block wx:if="{{item.congridtopbot==0}}">
+              <littleBox data-open="{{item.congridstatus}}" data-index="{{index}}" open="{{item.congridstatus}}" num="{{item.congridstandbytwo}}"  index="{{index}}" style="float:left" bindtap="add"  ></littleBox>
+            </block>
+          </block> 
+      </view> 
+    </view> 
+<!--   -->
+    <view class="messgage">
+        <view>
+            <view class="normal">总共选购了<text class="num"> {{chosen.length}} </text>件商品  <text class="scan" bindtap='scanDetail'>浏览详情</text></view> 
+            <view class="normal">总价:<text class="total"> {{total}} </text>元</view>
+        </view>
+    </view>
+ 
+    <view class="btn_pay">
+       <button disabled='{{disabled}}' loading='{{loading}}' plain="true" size="default" type="primary" wx:if="{{total!=0}}" bindtap='payforit' ><text class="pay">去支付</text></button>
+       <button plain="true" wx:else="{{total==0}}" disabled='true' ><text class="pay">请选择商品</text></button>
+    </view>
+<!-- 
+     <view>
+        <button size="default"  type="primary"  bindtap='getpass'> 获得密码</button>
+    </view>  -->
+
+    <view wx:if="{{payComplete}}">
+       <button style="margin:10rpx" size='mini' type="primary" bindtap='opengrids'>开锁</button>
+    </view>
+
+</view>  

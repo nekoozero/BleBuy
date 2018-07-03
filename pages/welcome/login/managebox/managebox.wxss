@@ -1,0 +1,4 @@
+/* pages/welcome/login/managebox/managebox.wxss */
+.btn-request{
+   margin-top:60rpx 
+}

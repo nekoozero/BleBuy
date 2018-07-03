@@ -1,0 +1,28 @@
+<view class="">
+    <view class="common header">
+    <text>编号：{{containernum}}</text>
+    <!-- <text>型号：{{contypeid}}</text> -->
+    </view>
+    <view>
+       <view  class="common place">
+          <text>存放地点：<text class="small">{{container.containnerstoreadd}}</text></text>
+       </view>
+       <view class="common place">
+           <text>柜子名称：<text class="small">{{container.containername}}</text></text>
+       </view>
+       <block wx:for="{{grids}}" wx:key="unique">
+          <view class="  single">
+              <image class="img" src='/img/sale.png'></image>
+              <view class="common">
+              <text><text class="no">No.{{index+1}}</text>  名称：<text class="import">{{item.congridname}}</text></text>
+              <text>价格：<text class="import">{{item.congridprice}}</text></text>
+              <text>单位：¥</text>
+              </view>
+          </view>
+       </block>
+      
+    </view>
+    <view class="footer">
+        <button data-id="{{id}}" bindtap='updateMe' class="weui-btn" type="primary">修改信息</button>
+    </view>
+</view>

@@ -1,0 +1,54 @@
+<view class="">
+    <view class="common header">
+     <view>编号：{{containernum}}</view>
+    </view>
+
+    <form bindsubmit='updateit'>
+
+      <view>
+        <view  class="common place">
+          <view style="width:30%">存放地点：</view>
+          <view style="width:65%">
+            <input class="input-place"  type='text' name="place" value="{{container.containnerstoreadd}}"></input>
+          </view>
+          
+        </view>
+         <view  class="common place">
+          <text style="width:30%">柜子名称：</text>
+          <view style="width:65%">
+            <input class="input-place"  type='text' name="conname" value="{{container.containername}}"></input>
+          </view>
+        </view>
+
+
+        <block wx:for="{{grids}}" wx:key="unique">
+            <view class="single">
+                <view class="common">
+                  <text>
+                  <text class="no">No.{{index+1}}</text> 名称：</text>
+                  <input name="name{{index}}" class='input-item' value="{{item.congridname}}"></input>
+                  <text>价格：</text>
+                  <input name="price{{index}}" class='input-item' value="{{item.congridprice}}"></input>
+                  <text>单位：¥</text>
+                </view>
+            </view>
+        </block>
+
+
+     <!-- value='{{now}}' -->
+
+        <view>
+            <picker name="updater" bindchange='choose'  range='{{suppliername}}'>
+              <view class="picker">
+                       补货员：{{nowSupplier}}
+              </view> 
+            </picker>
+        </view>
+       
+      </view>
+      <view class="footer">
+          <button formType="submit" class="weui-btn" type="primary">修改</button>
+      </view>
+
+    </form>
+</view>

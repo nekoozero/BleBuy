@@ -1,0 +1,22 @@
+<view>
+    <view class="top">
+        <text class="boxMe">货柜ID：{{num}}</text>
+        <block wx:if="{{connected==false}}">
+            <button  class="btn-ble" bindtap='connectBle' data-device-id="{{deviceId}}">连接蓝牙</button>
+        </block>
+        <block wx:if="{{connected==true}}">
+            <button  class="btn-ble" bindtap='disConnectBle' data-device-id="{{deviceId}}">断开连接</button>
+        </block>
+    </view>
+    <view class="message">
+        <text class='message_text'>温馨提示：<text>{{msg?msg:"使用前请记得打开蓝牙！"}}</text></text>
+    </view>
+
+    <view class="handle">
+        <button class='weui-button' type="primary"  bindtap='buhuo'>更新蓝牙信息</button>
+        <text wx:if="{{suc}}">蓝牙信息更新成功，请提交到服务器</text>
+   
+        <button class='weui-button' type="primary"  bindtap='submit'>提交服务器</button>
+        <text>{{msgg}}</text>
+    </view>
+</view>

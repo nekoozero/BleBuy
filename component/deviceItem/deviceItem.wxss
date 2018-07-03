@@ -1,0 +1,22 @@
+/* component/deviceItem.wxss */
+.item{
+  margin-top: 16rpx;
+  height:120rpx;
+  border-bottom: #666 solid 1px
+}
+.btn_conn{
+  float:right;
+  width:250rpx;
+  margin-right: 10rpx;
+  position:relative;
+}
+.text_name{
+   line-height: 90rpx
+}
+.connecting{
+   position: absolute;
+   top:16rpx;
+   right:14rpx;
+   width:60rpx;
+   height:60rpx; 
+}

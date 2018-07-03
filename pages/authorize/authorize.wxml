@@ -1,0 +1,7 @@
+<view class="container">
+  <view>
+    <image class="logo" src='/img/logo.jpg'></image>
+    <button type="primary" size="default" open-type="getUserInfo" bindgetuserinfo="getUserInfoAction">用户授权</button>
+  </view>
+</view>
+

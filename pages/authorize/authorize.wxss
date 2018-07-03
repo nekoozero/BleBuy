@@ -1,0 +1,11 @@
+.container{
+  display:flex;
+  flex-direction: column;
+  height:90vh;
+  justify-content: space-around
+}
+.logo{
+  width:300rpx;
+  height:300rpx;
+  border-radius: 50%
+}

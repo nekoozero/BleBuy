@@ -1,0 +1,23 @@
+.page{
+  height:100vh;
+  background-color: #ADADAD
+}
+.sample{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.image{
+  width:375rpx;
+  height:800rpx;
+}
+.page__title{
+  font-family: arial, sans-serif;
+  color: #8C5656;
+  font-size: 40rpx;
+  font-weight: bold;
+  font-style: italic;
+  letter-spacing: 1.6pt;
+  word-spacing: -9.6pt;
+  line-height: 1.7;
+}

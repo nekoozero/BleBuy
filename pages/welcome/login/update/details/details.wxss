@@ -1,0 +1,24 @@
+.message{
+  text-align: center;
+  margin-top: 40rpx;
+  color: #666;
+  border-top:red solid 1px;
+  border-bottom: red solid 1px;
+  background-color: #ff9;
+  height:50rpx;
+}
+.top{
+  display:flex;
+  height:92rpx
+}
+.boxMe{
+  font-size:40rpx;
+  line-height:92rpx;
+  margin-left:80rpx
+}
+.btn-ble{
+  margin-top: 10rpx;
+}
+.handle{
+  margin-top:40%
+}

@@ -1,0 +1,19 @@
+.input-item{
+  border-bottom: 1px #666 solid;
+  float: right;
+}
+.header{
+  padding:20rpx 0 20rpx 20rpx;
+  color:#93388f;
+  font-size: 36rpx;
+  font-family: "lucida sans unicode", "lucida grande", sans-serif;
+  border-bottom: 2px #eeeeee solid;
+}
+
+.item{
+  margin: 40rpx 0 0 30rpx;
+}
+
+.submit{
+ margin:30rpx;
+}

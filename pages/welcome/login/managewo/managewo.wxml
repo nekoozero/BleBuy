@@ -1,0 +1,7 @@
+<import src="/template/template.wxml"/>
+
+<template is="tabBar" data="{{tabBar:bindData.tabBar}}"/>
+<view class="body">
+    <button bindtap='addworker'>添加配货员</button>
+    <button bindtap='manageworker'>管理配货员</button>
+</view>

@@ -1,0 +1,41 @@
+.box{
+  display:block;
+  border: 1px solid #999;
+  height:120rpx;
+  text-align: center;
+  position: relative
+}
+.one{
+  width:49.6px;
+}
+.two{
+   width:99.2px;
+}
+.three{
+   width:101.3px;
+}
+.four{
+   width:75.5px;
+}
+.five{
+   width:558rpx;
+}
+.six{
+   width:308px;
+}
+
+.chosen{
+    background-color: #25BE03;
+}
+
+.bg{
+  width:50rpx;
+  height:50rpx;
+  position:absolute;
+  top:35%;
+  left:30%;
+}
+
+.noopen{
+  background-color: #916060;
+}

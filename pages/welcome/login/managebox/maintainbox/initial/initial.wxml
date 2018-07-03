@@ -1,0 +1,24 @@
+<view class="header" >
+    <text >初始化货柜</text>
+</view>
+<view class="container">
+    <view>
+      <button bindtap='initial'>初始化蓝牙</button>
+      <text>{{initMsg}}</text>
+    </view> 
+    <view>
+      <button bindtap='connect'>连接此蓝牙</button>
+      <text>{{connMsg}}</text>
+    </view>
+    <view>
+      <button bindtap='disconnect'>断开此蓝牙</button>
+      <text>{{disConnMsg}}</text>
+    </view>
+     <view> 
+      <button bindtap='startinitial'>开始初始化</button>
+      <text>
+      
+      </text>
+    </view>
+    
+</view>

@@ -1,0 +1,33 @@
+<view class="table">
+  <view class="tr bg-w">
+    <view class="th">货柜型号</view>
+    <view class="th ">查看</view>
+    <view class="th">数量</view>
+    
+    
+  </view> 
+  <form bindsubmit='submit'>
+    <block wx:for="{{listData}}" wx:key="{{code}}">
+      <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+        <view class="td">{{item.containertypename}}</view>
+        <view class="td"><image  class="message" bindtap='lookdetails' data-id="{{item.containertypeimg}}"   src="/img/message.png"  ></image></view>
+        <view class="td">
+          <input name="{{item.containertypeid}}" placeholder="0" type="number"></input>
+        </view>
+        
+      </view>
+      <view class="tr" wx:else>
+        <view class="td">{{item.containertypename}}</view>
+        <view class="td"><image class="message" bindtap='lookdetails' data-id="{{item.containertypeimg}}"  src="/img/message.png"></image></view>
+        <view class="td">
+          <input name="{{item.containertypeid}}" type="number" placeholder="0"></input>
+        </view>
+        
+      </view>
+    </block>
+    <view class="handle" style="margin-top:20%">
+      <button disabled='{{disabled}}' loading="{{loading}}"  class="weui-btn" type="primary" formType="submit">提交</button>
+      <button class="weui-btn" type="default" bindtap='back'>返回</button>
+    </view>
+  </form>
+</view>

@@ -1,0 +1,29 @@
+<!-- <block wx:if="{{chosen}}">
+  <view wx:if="{{open}}" data-box-id="{{index}}" class="box chosen {{num}}"  bindtap='cancel'><image  class="bg" src="/img/close.png" ></image></view>
+</block>
+
+<block wx:if="{{!chosen}}"> 
+  <view wx:if="{{open}}" data-box-id="{{index}}" class="box {{num}}"   bindtap='choose'><image  class="bg" src="/img/close.png" ></image></view>
+</block>
+
+
+<block wx:if="{{!open}}">
+  <view  data-box-id="{{index}}" class="box {{num}} noopen"    bindtap='nochoose'>
+   <image src="/img/open.png" class="bg" ></image>
+  </view>
+</block> -->
+
+<block wx:if="{{chosen}}">
+  <view wx:if="{{open}}" data-box-id="{{index}}" class="box   chosen "  bindtap='cancel' style="width:{{num}}px"><image  class="bg" src="/img/close.png" ></image></view>
+</block>
+
+<block wx:if="{{!chosen}}"> 
+  <view wx:if="{{open}}"  data-box-id="{{index}}" class="box "   bindtap='choose' style="width:{{num}}px"><image  class="bg" src="/img/close.png" ></image></view>
+</block>
+
+
+<block wx:if="{{!open}}">
+  <view  data-box-id="{{index}}" style="width:{{num}}px" class="box noopen"    bindtap='nochoose'>
+   <image src="/img/open.png" class="bg" ></image>
+  </view>
+</block>

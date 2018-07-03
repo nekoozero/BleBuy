@@ -1,0 +1,36 @@
+
+<view>
+   <form bindsubmit='addworker'>
+    <view class="input">
+        <view class='item'>
+          <text>工号：</text>
+          <input class="input-item"  type="text" name="supplierloginid"></input>
+        </view>
+        <view class='item'>
+          <text>姓名：</text>
+          <input class="input-item" type="text" name="suppliername"></input>
+        </view>
+        <view class='item'>
+          <text>手机号：</text>
+          <input class="input-item" type="text" name="suppliertelphone"></input>
+        </view>
+        <view class='item'>
+          <text>微信号：</text>
+          <input class="input-item" type="text" name="supplierwechat"></input>
+        </view>
+        <view class='item'>
+          <text>初始密码：</text>
+          <input class="input-item" type="password" name="supplierpassword"></input>
+        </view>
+
+        <view class='item'>
+            <button class="weui-btn" type="primary" formType="submit">提交</button>
+        </view>
+
+        <view class='item error'>
+            <text >{{msg}}</text>
+        </view>
+    </view>
+   </form>
+
+</view>

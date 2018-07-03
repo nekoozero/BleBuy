@@ -1,0 +1,50 @@
+/* pages/welcome/login/managebox/maintainbox/single/single.wxss */
+
+.header{
+   margin-top:16rpx;
+
+}
+.single{
+    margin:20rpx 0;
+    border-bottom: 4rpx solid #777
+}
+.small{
+  color: #9B989B;
+  text-decoration: underline;
+}
+.common{
+  display:flex;
+  flex-direction:row;
+  justify-content: space-around
+}
+.place{
+  margin:40rpx 20rpx 0 20rpx;
+  font-size: 32rpx;
+}
+.img{
+  width:36px;
+  height:36px;
+  float:left;
+  position:relative;
+  bottom:6rpx;
+}
+
+.import{
+  font-weight: bold;
+  font-size: 40rpx;
+}
+.no{
+  font-family:OCR A Std, monospace;
+  font-weight: 500;
+  position:relative;
+  left:-18rpx;
+}
+
+.role{
+  letter-spacing: 3.8pt;
+  font-style: italic;
+  color: #914D4D;
+}
+.footer{
+   margin-top:16rpx;
+}

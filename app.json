@@ -1,0 +1,56 @@
+{
+  "pages":[
+    "pages/first/first",
+    "pages/authorize/authorize",
+     "pages/welcome/welcome",
+    
+    "pages/welcome/login/managebox/maintainbox/initial/initial",
+    "pages/welcome/login/login", 
+    "pages/welcome/login/managebox/requirebox/requirebox",
+    "pages/welcome/login/managewo/manangeworker/workermessage/update/update",
+    "pages/welcome/login/managewo/manangeworker/workermessage/workmessage",
+    "pages/welcome/login/register/register",
+    "pages/welcome/login/managewo/managewo",
+    "pages/welcome/login/managebox/managebox",
+    "pages/welcome/login/managebox/maintainbox/single/single",
+    "pages/welcome/login/managewo/addworker/addworker",
+    "pages/welcome/login/managebox/maintainbox/maintainbox",
+    "pages/welcome/login/personal/personal",
+    "pages/welcome/login/managebox/maintainbox/single/updatesingle/updatesingle",
+    "pages/welcome/login/managebox/requirebox/boxdetail/boxdetail",
+    "pages/welcome/login/managewo/manangeworker/manangeworker",
+    "pages/welcome/box/box",
+    "pages/welcome/login/personal/updatepass/updatepass",
+    "pages/welcome/login/update/details/details",
+    "pages/welcome/login/update/update",
+    "pages/welcome/login/manageme/manageme",
+    "pages/welcome/login/managebox/querybox/querybox",
+    "pages/index/index",
+    "pages/logs/logs" 
+    
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#eee",
+    "navigationBarTitleText": "趣彩新零售",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "selectedColor": "#1296db",
+    "list": [
+      {
+        "pagePath": "pages/welcome/login/update/update",
+        "text": "补货",
+         "iconPath": "img/lookf.png",
+         "selectedIconPath": "img/lookt.png"
+      },
+      {
+        "pagePath": "pages/welcome/login/personal/personal",
+        "text": "个人中心",
+        "iconPath": "img/aboutf.png",
+        "selectedIconPath": "img/aboutt.png"
+      }
+      
+    ]
+  }
+} 

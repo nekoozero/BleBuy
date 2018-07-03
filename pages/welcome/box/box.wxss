@@ -1,0 +1,64 @@
+.box{
+     display:block;
+     height:100rpx;
+     width:100rpx;
+     text-align: center;
+     line-height:100rpx;
+     float:left;
+}
+.wholeBox {
+     position:relative;
+     top:10rpx;
+     float:left;
+     margin: 0 auto;
+}
+.viewClass{
+  display: flex;  
+  flex-direction: row;  
+  justify-content: center;  
+}
+.normal{
+  font-size: 50rpx;
+}
+.messgage{
+  clear:both;
+  position: relative;
+  top:60rpx;
+  left: 30rpx;
+}
+.num,.total{
+  font-family: impact, sans-serif;
+  font-size: 60rpx;
+}
+.total{
+  color:#5E581D;
+  font-size: 60rpx;
+}
+.scan {
+  font-family: verdana, sans-serif;
+  color: #0317AB;
+  font-size: 40rpx;
+  letter-spacing: -0.2pt;
+}
+
+.btn_pay{
+  margin-top:135rpx;
+}
+
+.pay{
+  font-family: verdana, sans-serif;
+  color: #898D9C;
+  font-size: 40rpx;
+  font-weight: bold;
+  font-style: italic;
+  text-align: justify;
+  letter-spacing: 5.6pt;
+
+}
+
+.test{
+  border: red 1px solid
+}
+.text{
+  border: blue 2px solid;
+}

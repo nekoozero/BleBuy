@@ -1,0 +1,21 @@
+  <view>
+    <form bindsubmit='updatemessage'>
+      <view class="body">
+        <view class="header">
+          <text>员工工号：</text><text>{{worker.supplierloginid}}</text>
+        </view>
+        <view class='item'>
+          <text>员工姓名：</text><input class="input-item" value="{{worker.suppliername}}"></input>
+        </view>
+        <view class='item'>
+          <text>员工微信号：</text><input class="input-item" value="{{worker.supplierwechat}}"></input>
+        </view>
+        <view class='item'>
+          <text>员工手机号：</text><input class="input-item" value="{{worker.suppliertelphone}}"></input>
+        </view>
+      </view>
+      <view class="submit">
+         <button class="weui-btn " type="primary" form-type='submit'>提交</button>
+      </view>
+    </form>
+  </view>    

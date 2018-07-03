@@ -1,0 +1,7 @@
+<!--pages/welcome/login/personal/personal.wxml-->
+<view>
+    <view class="container">
+        <button bindtap='changepass'>修改密码</button>
+        <button bindtap='changerole'>我要购物</button>
+    </view>
+</view>
