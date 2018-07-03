@@ -9,19 +9,22 @@
     </view>
 
     <view class="act">
-         <button  hidden='{{initialized}}' class="btn_init" bindtap='initBle'><text>初始化蓝牙 </text><image class="act_img"  src="/img/Ible.png" ></image></button> 
-         <button wx:if="{{initialized==true}}" class="btn_init" bindtap='{{discoverying?"stopScan":"startScan"}}'>{{discoverying?'停止搜索':'开始搜索'}} <image wx:if="{{discoverying}}" class="act_img"  src="/img/5.gif"></image></button>
+          <!-- <button  hidden='{{initialized}}' class="btn_init" bindtap='initBle'><text>初始化蓝牙 </text><image class="act_img"  src="/img/Ible.png" ></image></button> 
+         <button wx:if="{{initialized==true}}" class="btn_init" bindtap='{{discoverying?"stopScan":"startScan"}}'>{{discoverying?'停止搜索':'开始搜索'}} <image wx:if="{{discoverying}}" class="act_img"  src="/img/5.gif"></image></button>  -->
          <!-- <button bindtap='a'>d</button> -->
+        <button loading='{{loading}}' bindtap='beginscan'  class="btn_init">我要购物</button>
     </view>
 
 
-
+<!-- 
     <scroll-view class="deviceList">
         <block wx:if="{{data.length!=0}}" wx:for="{{data}}" wx:key="unique">
             <item itemName="{{item.name}}" itemDeviceId="{{item.deviceId}}" deviceId="{{item.deviceId}}">
             </item> 
         </block>
-    </scroll-view>
+    </scroll-view> -->
+    
+
 
     <view >
        <image src="/img/other.png" class="other" bindtap='other'></image>

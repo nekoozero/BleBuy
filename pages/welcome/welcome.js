@@ -10,6 +10,7 @@ Page({
         connected:false,
         showOthers:true,
         data:[], 
+        loading:false
   },
 
   /**
@@ -211,5 +212,56 @@ Page({
       `,
       showCancel:false
     })
+  },
+  beginscan:function(e){
+    let that = this;
+    that.setData({
+      loading:true
+    });
+    let p = new Promise((resolve,reject)=>{
+      wx.openBluetoothAdapter({
+        success: function (res) {
+          resolve();
+        },
+        fail: function (err) {
+          console.log(err);
+          reject(err);
+        }
+      })
+    })
+    p.then(()=>{
+      wx.scanCode({
+        success: function (res) {
+          let arr = res.result.split('&&');
+          let deviceId='';
+          //根据使用机型选择使用mac还是uuid
+          if (wx.getStorageSync('system').includes("Android")){
+            deviceId = arr[0];
+          }else{
+            deviceId = arr[1];
+          }
+          wx.createBLEConnection({
+            deviceId: deviceId,
+            success: function(res) {
+              console.log("连接成功");
+            },
+          })
+        }
+      });
+      
+      that.setData({
+        loading: false
+      });
+    }).catch((err)=>{
+      wx.showModal({
+        title: '提示',
+        content: '请确定打开蓝牙 ',
+        showCancel:false
+      });
+      that.setData({
+        loading:false
+      });
+    })
+     
   }
 })

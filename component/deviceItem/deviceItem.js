@@ -59,6 +59,7 @@ Component({
       wx.createBLEConnection({
         deviceId: deviceId,
         success: function (res) {
+          console.log(deviceId)
         that.stopScan();
           wx.showToast({
             title: '连接成功',
