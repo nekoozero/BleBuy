@@ -15,7 +15,7 @@
       <text>{{disConnMsg}}</text>
     </view>
      <view> 
-      <button bindtap='startinitial'>开始初始化</button>
+      <button loading='{{loading}}' disabled='{{disabled}}' bindtap='startinitial'>开始初始化</button>
       <text>
       
       </text>

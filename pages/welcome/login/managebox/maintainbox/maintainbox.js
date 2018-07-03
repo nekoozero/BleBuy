@@ -31,6 +31,15 @@ Page({
         },
         success:function(res){
           wx.hideLoading();
+          let list = res.data.data.list.map((item)=>{
+            let mac = item.containemac.split(",");
+            if(wx.getStorageSync('system').includes('iOS')){
+              item.containemac=mac[1];
+            }else{
+              item.containemac = mac[0];
+            }
+            return item;
+          })
           that.setData({
             listData:res.data.data.list
           })

@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+     loading:false,
+     disabled:false
   },
 
   /**
@@ -103,6 +104,18 @@ Page({
           connMsg:'请确定已初始化'
         })
       }
+    });
+    wx.onBLEConnectionStateChange(function(res){
+      console.log(res.connected);
+      if(res.connected==true){
+        that.setData({
+          connMsg: '成功'
+        });
+      }else if(res.connected==false){
+        that.setData({
+          connMsg: '请确定已初始化'
+        })
+      }
     })
   },
   disconnect:function(){
@@ -120,6 +133,17 @@ Page({
   },
   startinitial:function(){
     let that =this;
+    wx.showLoading({
+      title: '正在初始化,请勿有其他操作',
+      mask:true
+    });
+    that.setData({
+      loading:true,
+      diabled:true
+    });
+    wx.showLoading({
+                    title: '正在初始化',
+                  });
     let mac = that.data.mac;
     let distributorId = wx.getStorageSync("distributors").distributorid;
     let conId = this.data.containerId; 
@@ -135,7 +159,6 @@ Page({
       },
       method: 'POST',
       success:function(res){
-        console.log(res);
         let data = res.data.data.initial.gridInfos
 
 
@@ -234,9 +257,7 @@ Page({
 
                   }
 
-                  wx.showLoading({
-                    title: '正在初始化',
-                  });
+                  
                   wx.request({
                     url: 'https://www.jsqckj.cn/btunlockweb/containers/updatecontainerstatus',
                     data: {
@@ -257,97 +278,42 @@ Page({
                         wx.navigateTo({
                           url: '../maintainbox',
                         })
-                      }
+                      } 
                     }
                   })
               },fail:function(res){
                 console.log(res);
+                wx.showModal({
+                  title: '提示',
+                  content: '失败了',
+                })
+                that.setData({
+                  loading: false,
+                  disabled: false
+                });
+              },complete:function(ers){
+                
+                
               }
             })
           },
           fail:function (res) {
+            wx.showModal({
+              title: '提示',
+              content: '失败了',
+            })
             console.log(res);
             that.setData({
+              loading: false,
+              disabled: false,
               msg: res.errMsg
             });
-          },
-          complete: function (res) {
-            that.setData({
-              msg: res.errMsg
-            });
+            
           }
         })
-
-
-        // that.setData({
-        //   pickpass: pickpass,       //取货加密
-        //   supplypass: supplypass,   //补货加密
-        //   datasupp: datasupp    //30个格子的补货码
-        // });
         
       }
     });
    
   }
 })
-
-    //     let gridarr = res.data.data.initial.gridInfos;
-    //     let a1 = gridarr.slice(0,9);
-    //     let a2 = gridarr.slice(9,18);
-    //     let a3 = gridarr.slice(18,27);
-    //     let a4 = gridarr.slice(27);
-    //     for(let i =0;i<6;i++){
-    //       a4.push({ congridpass: '', congridstandbyone:''});
-    //     }
-    //     let all = [];
-    //     all.push(a1);
-    //     all.push(a2);
-    //     all.push(a3);
-    //     all.push(a4);
-
-    //     let startindex = 0;
-    //     for (let index = 0; index < 4; index++) {
-    //       let type = 0;
-    //       let arr = [];
-    //       for (let i = 0; i < 9; i++) {
-    //         let a = all[index]; 
-    //         arr[i * 2 + 2] = a[i].congridstandbyone;  //顾客取货码
-    //         arr[i * 2 + 3] = a[i].congridpass;   //补货码
-    //       }
-    //       arr[0] = 0, arr[1] = startindex;
-
-
-    //       //这里进行蓝牙传输
-
-    //       startindex = startindex + 9;
-    //     }
-
-    //   }
-    // })
-
-     // let typedArray = new Int8Array(arr).buffer;
-
-// wx.writeBLECharacteristicValue({
-//   deviceId: id,
-//   // serviceId: '0000ffe0-0000-1000-8000-00805f9b34fb',
-//   // characteristicId: '0000ffe1-0000-1000-8000-00805f9b34fb',
-//   serviceId: '0000fff0-0000-1000-8000-00805f9b34fb',
-//   characteristicId: '0000fff1-0000-1000-8000-00805f9b34fb',
-//   value: typedArray,
-//   success: function (res) {
-//     that.setData({
-//       msg: "发送成功"
-//     });
-//     console.log("初始化完成");
-//   },
-//   fail: function (res) {
-//     that.setData({
-//       msg: res.errMsg
-//     });
-//   },
-//   complete: function (res) {
-//     that.setData({
-//       msg: res.errMsg
-//     });
-//   }
-// })

@@ -73,7 +73,17 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+     
+     let that = this;
+     let id = this.data.id;
+     let p = new Promise((resolve,reject)=>{
+       wx.closeBLEConnection({
+         deviceId: id,
+         success: function (res) { },
+       });
+     })
+     
+     
   },
 
   /**

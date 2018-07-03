@@ -51,7 +51,7 @@ Component({
     },
     createConn:function(e){
       let deviceId = e.currentTarget.dataset.id;
-      //console.log(deviceId);
+      console.log(deviceId);
       var that = this;
       that.setData({
         connecting:true

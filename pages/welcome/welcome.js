@@ -202,7 +202,7 @@ Page({
     console.log("sss");
     wx.showModal({
       title: '温馨提示',
-      content: `1.连续多次连接、断开蓝牙可能会导致下次连接变慢，请耐心等待。
+      content: `1.连续多次退出来扫码可能会导致下次打开变慢，请耐心等待。
 
 2.如果真的很长时间连接没反应，请关闭蓝牙或退出小程序，重新打开蓝牙进入小程序使用。
 
@@ -232,6 +232,9 @@ Page({
     p.then(()=>{
       wx.scanCode({
         success: function (res) {
+          wx.showLoading({
+            title: '正在打开……',
+          })
           let arr = res.result.split('&&');
           let deviceId='';
           //根据使用机型选择使用mac还是uuid
@@ -240,10 +243,21 @@ Page({
           }else{
             deviceId = arr[1];
           }
+          
           wx.createBLEConnection({
             deviceId: deviceId,
             success: function(res) {
-              console.log("连接成功");
+              wx.hideLoading();
+              wx.navigateTo({
+                url: '/pages/welcome/box/box?id=' + deviceId,
+              })
+            },fail:function(err){
+              console.log(err);
+              wx.hideLoading();
+              wx.showModal({
+                title: '提示',
+                content: '打开失败了，不要灰心，重新扫码试试',
+              })
             },
           })
         }
