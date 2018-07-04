@@ -203,54 +203,79 @@ Page({
             ar.push(str.substr(i, 2));
           }
           return ar;
+        });
+        
+        //ios下需要先获取服务和特征值
+        //获取服务
+        wx.getBLEDeviceServices({
+          deviceId: that.data.deviceId,
+          success: function(res) {
+            //获取特征值
+            wx.getBLEDeviceCharacteristics({
+              deviceId: that.data.deviceId,
+              serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB',
+              success: function(res) {
+                //获取服务和特征值后 开始传输数据
+
+                for (let index = 0; index < a.length; index++) {
+                  let data = a[index];
+                  let sendData = new Uint8Array(data.map(function (h) {
+                    return parseInt(h, 16);
+                  })).buffer;
+                  wx.writeBLECharacteristicValue({
+                    deviceId: that.data.deviceId,
+                    //serviceId: '0000ffe0-0000-1000-8000-00805f9b34fb',
+                    //characteristicId: '0000ffe1-0000-1000-8000-00805f9b34fb',  //自己的板子
+                    serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB',
+                    characteristicId: '0000FFF1-0000-1000-8000-00805F9B34FB',  //老师的板子
+                    value: sendData,
+                    success: function (res) {
+                      console.log("第" + index + "个格子完成");
+                      that.setData({
+                        suc: true
+                      });
+                      console.log(a.length - 1);
+                      //如果是最后一个格子完成后 则给提示 并将按钮复位
+                      if (index == a.length - 1) {
+                        // wx.showModal({
+                        //   title: '提示',
+                        //   content: '密码已更换完成，请将数据提交到服务器！',
+                        //   showCancel:false
+                        // });
+
+                        that.setData({
+                          disabled: false,
+                          loading: false
+                        });
+                      }
+
+                    }, fail: function (res) {
+                      that.setData({
+                        suc: false
+                      });
+
+                      //失败了 将按钮复位
+                      that.setData({
+                        disabled: false,
+                        loading: false
+                      });
+                      console.log(res);
+                    }
+                  });
+                  util.sleep(1100);
+                }
+
+
+
+                 //这里传输数据结束
+              },
+            })
+          },
         })
-        for(let index=0;index<a.length;index++){
-          let data = a[index];
-          let sendData = new Uint8Array(data.map(function (h) {
-            return parseInt(h, 16);
-          })).buffer;  
-          wx.writeBLECharacteristicValue({
-             deviceId: that.data.deviceId,
-             //serviceId: '0000ffe0-0000-1000-8000-00805f9b34fb',
-             //characteristicId: '0000ffe1-0000-1000-8000-00805f9b34fb',  //自己的板子
-             serviceId: '0000fff0-0000-1000-8000-00805f9b34fb',
-             characteristicId: '0000fff1-0000-1000-8000-00805f9b34fb',  //老师的板子
-             value: sendData,
-             success: function (res) {
-              console.log("第"+index+"个格子完成");
-              that.setData({
-                suc:true
-              });
-              console.log(a.length-1);
-              //如果是最后一个格子完成后 则给提示 并将按钮复位
-              if(index==a.length-1){
-                // wx.showModal({
-                //   title: '提示',
-                //   content: '密码已更换完成，请将数据提交到服务器！',
-                //   showCancel:false
-                // });
+        
 
-                that.setData({
-                  disabled: false,
-                  loading: false
-                });
-             }
-             
-            },fail:function(res){
-              that.setData({
-                suc: false
-              });
 
-              //失败了 将按钮复位
-              that.setData({
-                disabled: false,
-                loading: false
-              });
-              console.log(res);
-            }
-          });
-          util.sleep(1100);
-        }
+        
         wx.hideLoading();
       }
     })
@@ -263,6 +288,7 @@ Page({
       wx.showModal({
         title: '警告',
         content: '不要重复提交！',
+        showCancel:false
       });
       return;
     }
