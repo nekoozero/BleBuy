@@ -13,10 +13,10 @@
     </view>
 
     <view class="handle">
-        <button class='weui-button' type="primary"  bindtap='buhuo'>更新蓝牙信息</button>
-        <text wx:if="{{suc}}">蓝牙信息更新成功，请提交到服务器</text>
+        <button disabled="{{disabled}}" loading="{{loading}}" class='weui-button' type="primary"  bindtap='buhuo'>更新货柜信息</button>
+        <view wx:if="{{suc}}">货柜信息更新成功，请提交到服务器</view>
    
-        <button class='weui-button' type="primary"  bindtap='submit'>提交服务器</button>
-        <text>{{msgg}}</text>
+        <button disabled='{{dis}}' loading="{{loa}}" class='weui-button' type="primary"  bindtap='submit'>提交到服务器</button>
+        <view>{{msgg}}</view>
     </view>
 </view>

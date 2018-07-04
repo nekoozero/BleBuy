@@ -6,6 +6,7 @@ Page({
   onLoad: function () {
     let that = this;
     let supplyId = wx.getStorageSync("distributors").supplierid;
+    console.log(supplyId);
     wx.request({
       url: 'https://www.jsqckj.cn/btunlockweb/suppliers/checkconbysup',
       method:'POST',
@@ -17,9 +18,21 @@ Page({
       },
       success:function(res){
         console.log(res);
+        let arr = res.data.data.containersList.map(item=>{
+          let a = item.containemac.split(',');
+          if (wx.getStorageSync('system').includes("Android")){
+            item.containemac =a[0];
+          }else{
+            item.containemac = a[1];
+          }
+          return item;
+        })
         that.setData({
-          listData: res.data.data.containersList
+          listData: arr
         });
+      },
+      fail:function(err){
+        console.log(err);
       }
     })
   },
