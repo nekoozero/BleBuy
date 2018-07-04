@@ -268,11 +268,14 @@ Page({
                     }) 
 
                     that.setData({
-                      payComplete: true,
+                      //payComplete: true,
                       datagram: res.data.data.pickGrids,
                       chosenOrder: chosenOrder,
                       a:a
                     });
+                    
+                    // 这里直接调用函数就行了  
+                    that.opengrids();
                    }
                  })
                  
@@ -307,30 +310,7 @@ Page({
   },
 
 
-//模拟确认付钱后的获得密码
-  // getpass:function(){
-  //    let that = this;;
-  //    wx.request({
-  //      //获取柜子密码
-  //      url: 'https://www.jsqckj.cn/btunlockweb/congrids/getpickpass',
-  //      data: {
-  //        "gridid[]": chosenId
-  //      },
-  //      header: {
-  //        'content-type': 'application/x-www-form-urlencoded'
-  //      },
-  //      method: 'POST',
-  //      success: function (res) {
-  //        that.setData({
-  //          payComplete: true,
-  //          datagram: res.data.data.pickGrids,
-  //          chosenOrder: chosenOrder,
-  //        })
-  //      }
-  //    })
 
-     
-  // },
   opengrids:function(){
     wx.showLoading({
       title: '正在打开……',
