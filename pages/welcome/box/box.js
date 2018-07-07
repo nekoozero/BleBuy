@@ -323,86 +323,117 @@ Page({
     let chosenOrder = this.data.chosenOrder;
     let a = that.data.a;    //选中的列表，发送蓝牙用
     console.log(chosenOrder);
-    for(let index=0;index<a.length;index++){
-      let sendArr = new Uint8Array(a[index].map(function (h) {
-        return parseInt(h, 16);
-      })).buffer; ;
-      wx.writeBLECharacteristicValue({
-        deviceId: mac,
-       // serviceId: '0000ffe0-0000-1000-8000-00805f9b34fb',
-        //characteristicId: '0000ffe1-0000-1000-8000-00805f9b34fb',  //自己的板子
-        serviceId: '0000fff0-0000-1000-8000-00805f9b34fb',
-        characteristicId: '0000fff1-0000-1000-8000-00805f9b34fb',  //老师的板子
-        value: sendArr,
-        success: function (res) {
-           console.log("第"+index+"包发送完成");
-           that.setData({
-             suc:true
-           });
-           if(index==a.length-1){
-             wx.request({
-               url: 'https://www.jsqckj.cn/btunlockweb/customers/paysucess',
-               header: {
-                 'content-type': 'application/x-www-form-urlencoded'
-               },
-               method: 'POST',
-               data: {
-                 openid: openid,
-                 serialnumber: '',
-                 cusbuytotal: total,
-                 conid: conid,
-                 'number[]': chosenOrder,
 
-               },
-               success: function (res) {
-                 let p = new Promise(function (resolve, reject) {
-                   wx.showModal({
-                     title: '提示',
-                     content: '门已打开，请取走货物！',
-                     showCancel: false
-                   });
-                   that.setData({
-                     chosen: [],
-                     total: 0,
-                     payComplete: false,
-                     chosenOrder: [],
-                     datagram: []
-                   });
-                   resolve();
-                 }).then(function (res) {
-                   let id = that.data.id;
-                   wx.request({
-                     url: 'https://www.jsqckj.cn/btunlockweb//congrids/listbyconmac',
-                     header: {
-                       'content-type': 'application/x-www-form-urlencoded'
-                     },
-                     method: 'POST',
-                     data: {
-                       conmac: id
-                     },
-                     success: function (res) {
-                       if (res.data.message == "SUCCESS") {
-                         that.setData({
-                           grids: res.data.data.grids,
-                           conid: res.data.data.grids[0].congridbyconid
-                         });
 
-                       }
-                     }
-                   })
-                 })
-               }
-             })
-           }
-         },
-        fail:function(res){
-          that.setData({
-            suc: false
-          });
-        }
-      })
-      util.sleep(1100);
-    }
+    //获取蓝牙服务
+    wx.getBLEDeviceServices({
+      deviceId: that.data.id,
+      success: function (res) {
+
+        //获取特征值
+        wx.getBLEDeviceCharacteristics({
+          deviceId: that.data.id,
+          serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB',
+          success: function (res) {
+            wx.showLoading({
+              title: '请耐心等待……',
+            });
+            for (let index = 0; index < a.length; index++) {
+              let sendArr = new Uint8Array(a[index].map(function (h) {
+                return parseInt(h, 16);
+              })).buffer;
+              wx.writeBLECharacteristicValue({
+                deviceId: mac,
+                // serviceId: '0000ffe0-0000-1000-8000-00805f9b34fb',
+                //characteristicId: '0000ffe1-0000-1000-8000-00805f9b34fb',  //自己的板子
+                serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB',
+                characteristicId: '0000FFF1-0000-1000-8000-00805F9B34FB',  //老师的板子
+                value: sendArr,
+                success: function (res) {
+                  console.log("第" + index + "包发送完成");
+                  that.setData({
+                    suc: true
+                  });
+                  if (index == a.length - 1) {
+                    wx.request({
+                      url: 'https://www.jsqckj.cn/btunlockweb/customers/paysucess',
+                      header: {
+                        'content-type': 'application/x-www-form-urlencoded'
+                      },
+                      method: 'POST',
+                      data: {
+                        openid: openid,
+                        serialnumber: '',
+                        cusbuytotal: total,
+                        conid: conid,
+                        'number[]': chosenOrder,
+
+                      },
+                      success: function (res) {
+                        wx.hideLoading();
+                        let p = new Promise(function (resolve, reject) {
+                          wx.showModal({
+                            title: '提示',
+                            content: '门已打开，请取走货物！',
+                            showCancel: false
+                          });
+                          that.setData({
+                            chosen: [],
+                            total: 0,
+                            payComplete: false,
+                            chosenOrder: [],
+                            datagram: []
+                          });
+                          resolve();
+                        }).then(function (res) {
+                          let id = that.data.id;
+                          wx.request({
+                            url: 'https://www.jsqckj.cn/btunlockweb//congrids/listbyconmac',
+                            header: {
+                              'content-type': 'application/x-www-form-urlencoded'
+                            },
+                            method: 'POST',
+                            data: {
+                              conmac: id
+                            },
+                            success: function (res) {
+                              if (res.data.message == "SUCCESS") {
+                                that.setData({
+                                  grids: res.data.data.grids,
+                                  conid: res.data.data.grids[0].congridbyconid
+                                });
+
+                              }
+                            }
+                          })
+                        })
+                      }
+                    })
+                  }
+                },
+                fail: function (res) {
+                  that.setData({
+                    suc: false
+                  });
+                }
+              })
+              util.sleep(1100);
+            }
+
+          },
+          fail: function (err) {
+            //获取特征值失败
+            console.log(err);
+          }
+        })
+      },
+      fail:function(err){
+        //获取服务失败
+        console.log(err)
+      }
+    })
+
+    
     wx.hideLoading();
     
   }
