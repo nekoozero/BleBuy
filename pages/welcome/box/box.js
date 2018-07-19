@@ -21,11 +21,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+      
       this.setData({
-        id:options.id    //mac地址
+        id:options.id ,   //mac地址
+        connId: options.connId||''
       });
       let that = this;
       let id = that.data.id;
+      
       wx.showLoading({
         title: '正在加载……',
       })
@@ -76,10 +79,14 @@ Page({
      
      let that = this;
      let id = this.data.id;
+     if (!wx.getStorageSync('system').includes("Android")) {
+       console.log("ios断开了");
+       id = that.data.connId
+     }
      let p = new Promise((resolve,reject)=>{
        wx.closeBLEConnection({
          deviceId: id,
-         success: function (res) { },
+         success: function (res) { console.log("ios断开了")},
        });
      })
      
@@ -163,6 +170,7 @@ Page({
   },
   payforit:function(){
     let that = this;
+    
     that.setData({
       disabled:true,
       loading:true
@@ -316,7 +324,14 @@ Page({
       title: '正在打开……',
     });
     let that = this;
-    let mac= that.data.id;
+    let mac = '';
+    // 根据手机判断mac还是uuid
+    if (wx.getStorageSync('system').includes("Android")) {
+      mac = that.data.id
+    } else {
+      mac = that.data.connId
+    }
+
     let openid = wx.getStorageInfoSync("openid");
     let total = this.data.total;
     let conid = this.data.conid;
@@ -327,12 +342,12 @@ Page({
 
     //获取蓝牙服务
     wx.getBLEDeviceServices({
-      deviceId: that.data.id,
+      deviceId: mac,
       success: function (res) {
 
         //获取特征值
         wx.getBLEDeviceCharacteristics({
-          deviceId: that.data.id,
+          deviceId: mac,
           serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB',
           success: function (res) {
             wx.showLoading({

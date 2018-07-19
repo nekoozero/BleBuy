@@ -49,7 +49,9 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-      
+      wx.stopBluetoothDevicesDiscovery({
+        success: function(res) {},
+      })
       wx.closeBluetoothAdapter({
         success: function(res) {},
       });
@@ -240,26 +242,67 @@ Page({
           //根据使用机型选择使用mac还是uuid
           if (wx.getStorageSync('system').includes("Android")){
             deviceId = arr[0];
-          }else{
+            wx.createBLEConnection({
+              deviceId: deviceId,
+              success: function (res) {
+                wx.hideLoading();
+                wx.navigateTo({
+                  url: '/pages/welcome/box/box?id=' + deviceId,
+                })
+              }, fail: function (err) {
+                console.log(err);
+                wx.hideLoading();
+                wx.showModal({
+                  title: '提示',
+                  content: '打开失败了，不要灰心，重新扫码试试',
+                })
+              },
+            })
+          }else{ 
+            let boxid = arr[0];
+            //这边改为0
             deviceId = arr[1];
+            wx.startBluetoothDevicesDiscovery({
+              allowDuplicatesKey: false,
+              success: function (res) {
+                wx.onBluetoothDeviceFound(function (res) {
+                  //检测搜索到的设备
+                  //console.log(deviceId, res.devices[0].localName)
+                  //ios将uuid传入下一个页面
+                  let connId = res.devices[0].deviceId;
+                  if (deviceId == res.devices[0].localName) {
+                    wx.createBLEConnection({
+                      deviceId: res.devices[0].deviceId,
+                      success: function (res) {
+                        console.log("成功了");
+                        wx.stopBluetoothDevicesDiscovery({
+                          success: function (res) {
+                            console.log("搜索已停止")
+                          },
+                        });
+                        wx.hideLoading();
+                        wx.navigateTo({
+                          url: '/pages/welcome/box/box?id=' + boxid + "&connId=" + connId,
+                        })
+
+                      },
+                      fail: function (err) {
+                        console.log(err);
+                        wx.hideLoading();
+                        wx.showModal({
+                          title: '提示',
+                          content: '打开失败了，不要灰心，重新扫码试试',
+                        });
+                      }
+                    })
+                  }
+                  //检测搜索到的设备 完毕
+                })
+              }
+            })
           }
           
-          wx.createBLEConnection({
-            deviceId: deviceId,
-            success: function(res) {
-              wx.hideLoading();
-              wx.navigateTo({
-                url: '/pages/welcome/box/box?id=' + deviceId,
-              })
-            },fail:function(err){
-              console.log(err);
-              wx.hideLoading();
-              wx.showModal({
-                title: '提示',
-                content: '打开失败了，不要灰心，重新扫码试试',
-              })
-            },
-          })
+          
         }
       });
       
