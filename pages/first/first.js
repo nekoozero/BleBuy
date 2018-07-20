@@ -41,6 +41,46 @@ Page({
           }, 
          fail:function(res){ 
            console.log(res);
+           //第二次登陆 
+           wx.request({
+             url: 'https://www.jsqckj.cn/btunlockweb/customers/selectbyopenid',
+             header: {
+               'content-type': 'application/x-www-form-urlencoded'
+             },
+             method: 'POST',
+             data: {
+               code: res.code
+             },
+             success: function (res) {
+               console.log(res);
+               wx.hideLoading();
+               wx.setStorageSync("openid", res.data.data.custome.customeropenid);
+               wx.redirectTo({
+                 url: '../welcome/welcome',
+               });
+             },
+             fail:function(){
+               //第三次点登陆
+               wx.request({
+                 url: 'https://www.jsqckj.cn/btunlockweb/customers/selectbyopenid',
+                 header: {
+                   'content-type': 'application/x-www-form-urlencoded'
+                 },
+                 method: 'POST',
+                 data: {
+                   code: res.code
+                 },
+                 success: function (res) {
+                   console.log(res);
+                   wx.hideLoading();
+                   wx.setStorageSync("openid", res.data.data.custome.customeropenid);
+                   wx.redirectTo({
+                     url: '../welcome/welcome',
+                   });
+                 }
+               });
+             }
+           })
          }
         })
       },
