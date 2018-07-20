@@ -22,6 +22,9 @@ Page({
     wx.login({
       success: function (res) {
         console.log(res);
+        that.setData({
+          res:res
+        });
         wx.request({
           url: 'https://www.jsqckj.cn/btunlockweb/customers/selectbyopenid',
           header: {
@@ -42,6 +45,7 @@ Page({
          fail:function(res){ 
            console.log(res);
            //第二次登陆 
+           let ress =  that.data.res;
            wx.request({
              url: 'https://www.jsqckj.cn/btunlockweb/customers/selectbyopenid',
              header: {
@@ -49,7 +53,7 @@ Page({
              },
              method: 'POST',
              data: {
-               code: res.code
+               code: ress.code
              },
              success: function (res) {
                console.log(res);
@@ -61,14 +65,15 @@ Page({
              },
              fail:function(){
                //第三次点登陆
+               let resss = that.data.res;
                wx.request({
                  url: 'https://www.jsqckj.cn/btunlockweb/customers/selectbyopenid',
                  header: {
                    'content-type': 'application/x-www-form-urlencoded'
                  },
-                 method: 'POST',
+                 method: 'POST',   
                  data: {
-                   code: res.code
+                   code: resss.code
                  },
                  success: function (res) {
                    console.log(res);
