@@ -266,8 +266,11 @@ Page({
                     
                     let a = res.data.data.pickGrids.map(function (obj) {
                       let ar = [];
-                      ar.push(1);
-                      ar.push(obj.number);
+                      ar.push(2);   //2表示操作码是2
+                    
+                        ar.push(obj.number.toString(16));   //格子号转为16进制
+                  
+                      
                       let str = obj.pickpass + '0000000000000000';
                       for (let i = 0; i < 32; i = i + 2) {
                         ar.push(str.substr(i, 2));
@@ -360,7 +363,7 @@ Page({
               wx.writeBLECharacteristicValue({
                 deviceId: mac,
                 // serviceId: '0000ffe0-0000-1000-8000-00805f9b34fb',
-                //characteristicId: '0000ffe1-0000-1000-8000-00805f9b34fb',  //自己的板子
+               // characteristicId: '0000ffe1-0000-1000-8000-00805f9b34fb',  //自己的板子
                 serviceId: '0000FFF0-0000-1000-8000-00805F9B34FB',
                 characteristicId: '0000FFF1-0000-1000-8000-00805F9B34FB',  //老师的板子
                 value: sendArr,
@@ -419,14 +422,22 @@ Page({
                                 });
 
                               }
+                            },
+                            fail:function(err){
+                              console.log(err);
                             }
                           })
                         })
+                      },
+                      fail:function(err){
+                         console.log(err);
                       }
                     })
                   }
                 },
                 fail: function (res) {
+                  console.log(res);
+                  wx.hideLoading()
                   that.setData({
                     suc: false
                   });

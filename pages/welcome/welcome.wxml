@@ -5,7 +5,7 @@
         <image class="header_img" src="/img/ble.png"></image>
     </view>
     <view class="message">
-        <text catchtap="moretips" class='message_text'>温馨提示：<text>{{msg?msg:"使用前请记得打开蓝牙和定位服务！"}}</text><text  class="moretips">更多……</text></text>
+        <text catchtap="moretips" class='message_text'>温馨提示：<text>{{msg?msg:"请记得打开蓝牙和定位服务！"}}</text><text  class="moretips">更多……</text></text>
     </view>
 
     <view class="act">

@@ -189,6 +189,13 @@ Page({
           title: '正在操作……',
           
         });
+        if (res.data.data.pickGrids.length==0){
+          that.setData({
+            disabled: false,
+            loading: false
+          });
+          return;
+        }
         //保存数据  上传服务器需要
         that.setData({
           pickGrids: res.data.data.pickGrids
@@ -197,7 +204,7 @@ Page({
         let a = res.data.data.pickGrids.map(function (obj) {
           let ar = [];
           ar.push(1);
-          ar.push(obj.number);
+          ar.push(obj.number.toString(16));    //格子号改成16进制
           let str = obj.reppass + obj.reppassnew+obj.pickpassnew;
           for (let i = 0; i < 32; i = i + 2) {
             ar.push(str.substr(i, 2));
@@ -262,7 +269,7 @@ Page({
                       console.log(res);
                     }
                   });
-                  util.sleep(1100);
+                  util.sleep(1200);
                 }
 
 

@@ -40,16 +40,19 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    wx.closeBluetoothAdapter({
-      success: function(res) {},
-    })
+   
+   
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    let that = this;
+      wx.closeBLEConnection({
+        deviceId: that.data.mac,
+        success: function(res) {},
+      })
   },
 
   /**
@@ -156,6 +159,7 @@ Page({
       },
       method: 'POST',
       success:function(res){
+        console.log(res);
         let data = res.data.data.initial.gridInfos
 
 
@@ -328,7 +332,9 @@ Page({
               });
           
              //写入结束
-            },
+            },fail:function(err){
+             console.log(err)
+            }
           });
          
         

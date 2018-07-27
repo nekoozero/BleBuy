@@ -267,7 +267,7 @@ Page({
               success: function (res) {
                 wx.onBluetoothDeviceFound(function (res) {
                   //检测搜索到的设备
-                  //console.log(deviceId, res.devices[0].localName)
+                  console.log(deviceId, res.devices[0].localName)
                   //ios将uuid传入下一个页面
                   let connId = res.devices[0].deviceId;
                   if (deviceId == res.devices[0].localName) {

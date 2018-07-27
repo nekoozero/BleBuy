@@ -1,7 +1,7 @@
 <view class="container">
   <view>
     <image class="logo" src='/img/logo.jpg'></image>
-    
+     
   </view>
 </view>
 
