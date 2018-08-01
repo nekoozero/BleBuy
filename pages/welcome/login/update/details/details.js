@@ -25,7 +25,7 @@ Page({
     // console.log(options)  
     that.setData({
       id:options.id,
-      deviceId:options.deviceId,
+      // deviceId:options.deviceId,
       disId: options.disId,
       num:options.num
     });
@@ -57,11 +57,16 @@ Page({
    */
   onUnload: function () {
       let that =this;
-      let deviceId = that.data.deviceId;
-      wx.closeBLEConnection({
-        deviceId: deviceId,
-        success: function(res) {},
-      })
+      //如果deviceId不为空  则还没有连接过 一旦连接过 deviceId都不会为空
+      if(that.data.deviceId!=null){
+        wx.closeBLEConnection({
+          deviceId: that.data.deviceId,
+          success: function (res) { 
+            console.log("断开蓝牙了！");
+          },
+        })
+      }
+      
   },
 
   /**
@@ -84,6 +89,80 @@ Page({
   onShareAppMessage: function () {
   
   },
+  //扫码连接  兼容ios
+  startconn:function(){
+      let that = this; 
+      wx.scanCode({
+        success:function(res){
+
+               
+          
+
+          let arr = res.result.split('&&');
+          let deviceId = '';
+          //根据使用机型选择使用mac还是uuid
+          if (wx.getStorageSync('system').includes("Android")) {
+            deviceId = arr[0];
+            that.setData({
+              deviceId: deviceId
+            });
+            that.connectBle();
+           
+          } else {
+
+            //扫码连接  ios
+            let boxid = arr[0];
+            //这边改为0
+            deviceId = arr[1];
+
+            //搜索设备前 需要打开蓝牙适配器 
+            let pro = new Promise((resolve,reject)=>{
+              wx.openBluetoothAdapter({
+                success: function(res) {
+                  resolve();
+                },
+              });
+ 
+            });
+            pro.then((res)=>{
+              wx.startBluetoothDevicesDiscovery({
+                allowDuplicatesKey: false,
+                success: function (res) {
+                  wx.onBluetoothDeviceFound(function (res) {
+                    //检测搜索到的设备
+                    console.log(deviceId, res.devices[0].localName)
+                    //ios将uuid传入下一个页面
+                    let connId = res.devices[0].deviceId;
+
+                    //deviceId(mac地址)  localname会被修改成mac地址
+                    if (deviceId == res.devices[0].localName) {
+                      that.setData({
+                        deviceId: connId
+                      });
+
+                      that.connectBle();
+                      
+                    }
+                    //检测搜索到的设备 完毕
+                  })
+                },
+                fail: function (err) {
+                  console.log(err);
+                }
+              })
+            })
+            
+
+            
+          }
+
+
+
+               
+        }
+      })
+  }
+  ,
   connectBle:function(event){
     wx.showLoading({
       title: '正在连接蓝牙……',
@@ -93,24 +172,7 @@ Page({
     let deviceId = that.data.deviceId;
     wx.openBluetoothAdapter({
       success: function(res) {
-        wx.createBLEConnection({
-          deviceId: deviceId,
-          success: function (res) {
-            that.setData({
-              connected: true,
-              msg:'连接成功'
-            });
-          },
-          complete:function(){
-            wx.hideLoading();
-          },
-          fail:function(res){
-            console.log(res);
-            that.setData({
-              msg: '连接失败'
-            });
-          }
-        })
+        
 
       },
       fail:function(res){
@@ -118,6 +180,34 @@ Page({
          that.setData({
              msg:"请确定已打开蓝牙"
          });
+
+      },
+      complete:function(){
+        wx.createBLEConnection({
+          deviceId: deviceId,
+          success: function (res) {
+            that.setData({
+              connected: true,
+              msg: '连接成功'
+            });
+            //连接成功后  就会停止扫描 android此方法会失败
+            wx.stopBluetoothDevicesDiscovery({
+              success: function(res) {},
+              fail:function(err){
+
+              }
+            })
+          },
+          complete: function () {
+            wx.hideLoading();
+          },
+          fail: function (res) {
+            console.log(res);
+            that.setData({
+              msg: '连接失败'
+            });
+          }
+        })
       }
     });
     
@@ -136,6 +226,9 @@ Page({
            connected:false
          });
          wx.closeBluetoothAdapter();
+      },
+      fail:function(err){
+         console.log(err);
       },
       complete:function(){
         wx.hideLoading();
@@ -193,6 +286,10 @@ Page({
           that.setData({
             disabled: false,
             loading: false
+          });
+          wx.hideLoading();
+          that.setData({
+            msgg: '暂无货物更新！'
           });
           return;
         }
@@ -252,7 +349,8 @@ Page({
 
                         that.setData({
                           disabled: false,
-                          loading: false
+                          loading: false,
+                          submmited: false
                         });
                       }
 
@@ -306,7 +404,7 @@ Page({
     let supId = wx.getStorageSync("distributors").supplierid;
     if (that.data.pickGrids.length==0){
       that.setData({
-        msgg:'请先更新货柜信息！'
+        msgg:'暂无货物更新！'
       });
       that.setData({
         dis:false,
@@ -327,17 +425,28 @@ Page({
           pickgrid: JSON.stringify(that.data.pickGrids)
         },
         success: function (res) {
-          console.log(res)
-          wx.showModal({
-            title: '提示',
-            content: '货物更新已全部完成！',
-            showCancel: false
+          console.log(res);
+          let p  = new Promise((resolve,reject)=>{
+            wx.showModal({
+              title: '提示',
+              content: '货物更新已全部完成！',
+              showCancel: false
+            });
+            that.setData({
+              dis: false,
+              loa: false,
+              submmited: true
+            });
+            resolve();
           });
-          that.setData({
-            dis: false,
-            loa: false,
-            submmited: true
+
+          p.then(()=>{
+            that.onUnload();
+            wx.navigateBack({
+
+            });
           });
+         
 
         },fail:function(err){
            wx.showModal({

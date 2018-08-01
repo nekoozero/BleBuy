@@ -9,7 +9,8 @@
 }
 .top{
   display:flex;
-  height:92rpx
+  height:92rpx;
+   margin-top: 10rpx;
 }
 .boxMe{
   font-size:40rpx;
@@ -17,7 +18,7 @@
   margin-left:80rpx
 }
 .btn-ble{
-  margin-top: 10rpx;
+  /* */
 }
 .handle{
   height:50vh;
@@ -25,4 +26,11 @@
   display:flex;
   flex-direction: column;
   justify-content:space-between; 
+}
+.tips{
+ 
+ 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }

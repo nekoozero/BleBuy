@@ -49,6 +49,7 @@ Page({
       this.setData({
         error: "账号或密码不得为空！"
       });
+      wx.hideLoading();
     } else {
       wx.request({
         url: 'https://www.jsqckj.cn/btunlockweb/distributors/login',

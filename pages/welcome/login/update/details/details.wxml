@@ -2,7 +2,7 @@
     <view class="top">
         <text class="boxMe">货柜ID：{{num}}</text>
         <block wx:if="{{connected==false}}">
-            <button  class="btn-ble" bindtap='connectBle' data-device-id="{{deviceId}}">连接蓝牙</button>
+            <button  class="btn-ble" bindtap='startconn' data-device-id="{{deviceId}}">连接货柜</button>
         </block>
         <block wx:if="{{connected==true}}">
             <button  class="btn-ble" bindtap='disConnectBle' data-device-id="{{deviceId}}">断开连接</button>
@@ -14,9 +14,9 @@
 
     <view class="handle">
         <button disabled="{{disabled}}" loading="{{loading}}" class='weui-button' type="primary"  bindtap='buhuo'>更新货柜信息</button>
-        <view wx:if="{{suc}}">货柜信息更新成功，请提交到服务器</view>
+        <view class="tips" wx:if="{{suc}}">货柜信息更新成功，请提交到服务器</view>
    
         <button disabled='{{dis}}' loading="{{loa}}" class='weui-button' type="primary"  bindtap='submit'>提交到服务器</button>
-        <view>{{msgg}}</view>
+        <view class="tips">{{msgg}}</view>
     </view>
 </view>

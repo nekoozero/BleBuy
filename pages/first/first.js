@@ -63,7 +63,8 @@ Page({
                  url: '../welcome/welcome',
                });
              },
-             fail:function(){
+             fail:function(err){
+               console.log(err);
                //第三次点登陆
                let resss = that.data.res;
                wx.request({
@@ -82,6 +83,9 @@ Page({
                    wx.redirectTo({
                      url: '../welcome/welcome',
                    });
+                 },
+                 faile:function(err){
+                   console.log(err);
                  }
                });
              }

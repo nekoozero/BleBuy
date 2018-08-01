@@ -82,6 +82,7 @@ Page({
         that.setData({
           initMsg:'成功'
         });
+        
       },
       fail:function(res){
         that.setData({
@@ -104,19 +105,20 @@ Page({
       fail:function(res){
         console.log(res);
         that.setData({
-          connMsg:'请确定已初始化'
+          connMsg:'无连接'
         })
       }
     });
     wx.onBLEConnectionStateChange(function(res){
-      
+      console.log(res);
       if(res.connected==true){
         that.setData({
           connMsg: '成功'
         });
       }else if(res.connected==false){
         that.setData({
-          connMsg: '请确定已初始化'
+          connMsg: '无连接',
+          disConnMsg: ''
         })
       }
     })
@@ -333,7 +335,8 @@ Page({
           
              //写入结束
             },fail:function(err){
-             console.log(err)
+             console.log(err);
+             wx.hideLoading();
             }
           });
          
