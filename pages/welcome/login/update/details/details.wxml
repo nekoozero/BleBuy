@@ -18,5 +18,6 @@
    
         <button disabled='{{dis}}' loading="{{loa}}" class='weui-button' type="primary"  bindtap='submit'>提交到服务器</button>
         <view class="tips">{{msgg}}</view>
+        
     </view>
 </view>

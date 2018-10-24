@@ -464,5 +464,10 @@ Page({
       })
     }
     
+  },
+  backto:function(){
+    wx.redirectTo({
+      url: '../update.wxml',
+    })
   }
 })

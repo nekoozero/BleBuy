@@ -105,5 +105,10 @@ Page({
       url: 'updatesingle/updatesingle?id=' + that.data.id + "&containernum=" + that.data.containernum,
     })
     
+  },
+  backToFirst:function(){
+    wx.redirectTo({
+      url: '../../../managebox/managebox',
+    })
   }
 })

@@ -24,5 +24,6 @@
     </view>
     <view class="footer">
         <button data-id="{{id}}" bindtap='updateMe' class="weui-btn" type="primary">修改信息</button>
+        <button  bindtap='backToFirst' class="weui-btn" type="primary">返回首页</button>
     </view>
 </view>

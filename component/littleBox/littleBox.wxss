@@ -3,7 +3,14 @@
   border: 1px solid #999;
   height:120rpx;
   text-align: center;
-  position: relative
+  position: relative;
+  line-height: 120rpx;
+}
+.text-index{
+  font-family: impact, sans-serif;
+  font-weight: bold;
+  letter-spacing: 0.2pt;
+
 }
 .one{
   width:49.6px;

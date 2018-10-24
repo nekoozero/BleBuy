@@ -8,7 +8,7 @@ Component({
       type:Boolean
     },
     index:{
-      type:String
+      type:Number
     },
 
     num:{

@@ -2,11 +2,11 @@
     <view class="viewClass">
       <view class="wholeBox">
           <block  wx:for="{{grids}}" wx:key="unique">
-          <block wx:if="{{item.congridtopbot==1}}" >
-              <littleBox data-open="{{item.congridstatus}}" data-index="{{index}}"  open="{{item.congridstatus}}" num="{{item.congridstandbytwo}}"  index="{{index}}" style="float:left;clear:left;" bindtap="add"></littleBox>
-          </block>
-          <block wx:if="{{item.congridtopbot==0}}">
-              <littleBox data-open="{{item.congridstatus}}" data-index="{{index}}" open="{{item.congridstatus}}" num="{{item.congridstandbytwo}}"  index="{{index}}" style="float:left" bindtap="add"  ></littleBox>
+            <block wx:if="{{item.congridtopbot==1}}" >
+                <littleBox data-open="{{item.congridstatus}}" data-index="{{index}}"  open="{{item.congridstatus}}" num="{{item.congridstandbytwo}}"  index="{{index}}" style="float:left;clear:left;" bindtap="add"></littleBox>
+            </block>
+            <block wx:if="{{item.congridtopbot==0}}">
+                <littleBox data-open="{{item.congridstatus}}" data-index="{{index}}" open="{{item.congridstatus}}" num="{{item.congridstandbytwo}}"  index="{{index}}" style="float:left" bindtap="add"  ></littleBox>
             </block>
           </block> 
       </view> 

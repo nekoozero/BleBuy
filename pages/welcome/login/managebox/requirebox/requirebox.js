@@ -117,6 +117,7 @@ Page({
           content: '请填入正确的数字',
           showCancel:false
         }); 
+        
         return;
       }else{
         formData[x]  = parseInt(formData[x]);
@@ -163,8 +164,6 @@ Page({
             loading:false,
             disabled:false
           });
-          return;
-
       }
     }
   },
