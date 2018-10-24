@@ -62,7 +62,7 @@ Page({
         wx.closeBLEConnection({
           deviceId: that.data.deviceId,
           success: function (res) { 
-            console.log("断开蓝牙了！");
+          //  console.log("断开蓝牙了！");
           },
         })
       }
@@ -130,7 +130,8 @@ Page({
                 success: function (res) {
                   wx.onBluetoothDeviceFound(function (res) {
                     //检测搜索到的设备
-                    console.log(deviceId, res.devices[0].localName)
+                    //console.log(res);
+                    //console.log(deviceId, res.devices[0].localName)
                     //ios将uuid传入下一个页面
                     let connId = res.devices[0].deviceId;
 
@@ -147,7 +148,7 @@ Page({
                   })
                 },
                 fail: function (err) {
-                  console.log(err);
+                  //console.log(err);
                 }
               })
             })
@@ -202,7 +203,7 @@ Page({
             wx.hideLoading();
           },
           fail: function (res) {
-            console.log(res);
+            //console.log(res);
             that.setData({
               msg: '连接失败'
             });
@@ -228,7 +229,7 @@ Page({
          wx.closeBluetoothAdapter();
       },
       fail:function(err){
-         console.log(err);
+        // console.log(err);
       },
       complete:function(){
         wx.hideLoading();
@@ -275,8 +276,8 @@ Page({
         supid: supId
       },
       success:function(res){
-        console.log("下面要补货的东西：");
-        console.log(res);
+       // console.log("下面要补货的东西：");
+       // console.log(res);
         wx.hideLoading();
         wx.showLoading({
           title: '正在操作……',
@@ -334,11 +335,11 @@ Page({
                     characteristicId: '0000FFF1-0000-1000-8000-00805F9B34FB',  //老师的板子
                     value: sendData,
                     success: function (res) {
-                      console.log("第" + index + "个格子完成");
+                    //  console.log("第" + index + "个格子完成");
                       that.setData({
                         suc: true
                       });
-                      console.log(a.length - 1);
+                    //  console.log(a.length - 1);
                       //如果是最后一个格子完成后 则给提示 并将按钮复位
                       if (index == a.length - 1) {
                         // wx.showModal({
@@ -364,7 +365,7 @@ Page({
                         disabled: false,
                         loading: false
                       });
-                      console.log(res);
+                    //  console.log(res);
                     }
                   });
                   util.sleep(1200);
@@ -412,7 +413,7 @@ Page({
       });
       return;
     }else{
-      console.log(that.data.pickGrids)
+    //  console.log(that.data.pickGrids)
       wx.request({
         url: 'https://www.jsqckj.cn/btunlockweb/suppliers/addrecords',
         header: {
@@ -425,7 +426,7 @@ Page({
           pickgrid: JSON.stringify(that.data.pickGrids)
         },
         success: function (res) {
-          console.log(res);
+        //  console.log(res);
           let p  = new Promise((resolve,reject)=>{
             wx.showModal({
               title: '提示',

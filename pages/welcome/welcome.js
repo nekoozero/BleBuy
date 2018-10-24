@@ -201,7 +201,7 @@ Page({
     
   },
   moretips:function(){
-    console.log("sss");
+   
     wx.showModal({
       title: '温馨提示',
       content: `1.连续多次退出来扫码可能会导致下次打开变慢，请耐心等待。
@@ -226,7 +226,7 @@ Page({
           resolve();
         },
         fail: function (err) {
-          console.log(err);
+       //   console.log(err);
           reject(err);
         }
       })
@@ -250,7 +250,7 @@ Page({
                   url: '/pages/welcome/box/box?id=' + deviceId,
                 })
               }, fail: function (err) {
-                console.log(err);
+              //  console.log(err);
                 wx.hideLoading();
                 wx.showModal({
                   title: '提示',
@@ -267,17 +267,18 @@ Page({
               success: function (res) {
                 wx.onBluetoothDeviceFound(function (res) {
                   //检测搜索到的设备
-                  console.log(deviceId, res.devices[0].localName)
+                 // console.log(res);
+                 // console.log(deviceId, res.devices[0].localName)
                   //ios将uuid传入下一个页面
                   let connId = res.devices[0].deviceId;
                   if (deviceId == res.devices[0].localName) {
                     wx.createBLEConnection({
                       deviceId: res.devices[0].deviceId,
                       success: function (res) {
-                        console.log("成功了");
+                      //  console.log("成功了");
                         wx.stopBluetoothDevicesDiscovery({
                           success: function (res) {
-                            console.log("搜索已停止")
+                      //      console.log("搜索已停止")
                           },
                         });
                         wx.hideLoading();
@@ -287,7 +288,7 @@ Page({
 
                       },
                       fail: function (err) {
-                        console.log(err);
+                      //  console.log(err);
                         wx.hideLoading();
                         wx.showModal({
                           title: '提示',
